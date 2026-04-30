@@ -6,7 +6,5 @@ export const unknownRouteHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  const err = new Error('Unknown Route');
-  (err as AppError).status = 404;
-  next(err);
+  throw new AppError("Unknown Route", 404);
 };

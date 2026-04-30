@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import type { AppError } from "../middlewares/errorHandler";
+import { AppError } from "../middlewares/errorHandler";
 import { messages } from "../models/templateModel";
 
 export const createMessage = (
@@ -9,15 +9,19 @@ export const createMessage = (
 ) => {
   try {
     const { message } = req.body;
+    
     if (typeof message !== "string" || message.trim() === "") {
-      const err = new Error("Message is required and must be a string");
-      (err as AppError).status = 400;
-      throw err;
+      throw new AppError("Message is required and must be a string", 400);
     }
-    messages.push({ id: messages.length + 1, message });
-    res.status(201).json({ message });
+
+
+    const newId = messages.length > 0 ? Math.max(...messages.map(m => m.id)) + 1 : 1;
+    const newMessage = { id: newId, message };
+    
+    messages.push(newMessage);
+    res.status(201).json(newMessage);
   } catch (error) {
-    next(error); // Pass to global error handler
+    next(error);
   }
 };
 
@@ -29,21 +33,20 @@ export const updateMessage = (
   try {
     const { id } = req.params;
     const { message } = req.body;
+    
     if (typeof message !== "string" || message.trim() === "") {
-      const err = new Error("Message is required and must be a string");
-      (err as AppError).status = 400;
-      throw err;
+      throw new AppError("Message is required and must be a string", 400);
     }
+    
     const index = messages.findIndex((msg) => msg.id === parseInt(id));
     if (index === -1) {
-      const err = new Error("Message not found");
-      (err as AppError).status = 404;
-      throw err;
+      throw new AppError("Message not found", 404);
     }
+    
     messages[index].message = message;
-    res.status(200).json({ message });
+    res.status(200).json(messages[index]);
   } catch (error) {
-    next(error); // Pass to global error handler
+    next(error);
   }
 };
 
@@ -55,15 +58,15 @@ export const deleteMessage = (
   try {
     const { id } = req.params;
     const index = messages.findIndex((msg) => msg.id === parseInt(id));
+    
     if (index === -1) {
-      const err = new Error("Message not found");
-      (err as AppError).status = 404;
-      throw err;
+      throw new AppError("Message not found", 404);
     }
+    
     messages.splice(index, 1);
     res.status(204).send();
   } catch (error) {
-    next(error); //pass to global error handler
+    next(error);
   }
 };
 
@@ -75,17 +78,21 @@ export const getMessages = (
   res.status(200).json(messages);
 };
 
-export const getMessage = (req: Request, res: Response, next: NextFunction) => {
+export const getMessage = (
+  req: Request, 
+  res: Response, 
+  next: NextFunction
+) => {
   try {
     const { id } = req.params;
     const message = messages.find((msg) => msg.id === parseInt(id));
+    
     if (!message) {
-      const err = new Error("Message not found");
-      (err as AppError).status = 404;
-      throw err;
+      throw new AppError("Message not found", 404);
     }
+    
     res.status(200).json(message);
   } catch (error) {
-    next(error); //pass to global error handler
+    next(error);
   }
 };

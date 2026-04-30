@@ -1,18 +1,32 @@
 import { Request, Response, NextFunction } from "express";
-import { RandomUUIDOptions } from "crypto"; //Linter Check
 
-export interface AppError extends Error {
-  status?: number;
+export class AppError extends Error {
+  public status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.status = status;
+    
+
+    Object.setPrototypeOf(this, AppError.prototype);
+    Error.captureStackTrace(this, this.constructor);
+  }
 }
 
 export const errorHandler = (
-  err: AppError,
+  err: Error | AppError,
   req: Request,
   res: Response,
   _next: NextFunction
 ) => {
-  console.error(`Status ${err.status}: ${err.message}`);
-  res.status(err.status || 500).json({
-    message: err.message || "Internal Server Error",
+  const status = err instanceof AppError ? err.status : 500;
+  const message = err.message || "Internal Server Error";
+
+  console.error(`[Error] Status ${status}: ${message}`);
+  
+  res.status(status).json({
+    success: false,
+    message,
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
   });
 };

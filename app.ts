@@ -1,19 +1,24 @@
 import express from "express";
+import cors from "cors";
+import helmet from "helmet";
 import templateRoutes from "./src/routes/templateRoutes";
 import { errorHandler } from "./src/middlewares/errorHandler";
 import { unknownRouteHandler } from "./src/middlewares/unknownRouteHandler";
 
 const app = express();
 
+// Security Headers
+app.use(helmet());
+app.use(cors());
+
+//Json Body Parser
 app.use(express.json());
 
-// Routes
-app.use("/", templateRoutes);
+//API Routes
+app.use("/api/v1/templates", templateRoutes);
 
-// Handle unknown routes
+//Middlewares
 app.use(unknownRouteHandler);
-
-// Global error handler (should be after routes)
 app.use(errorHandler);
 
 export default app;
