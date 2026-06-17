@@ -5,7 +5,7 @@ import {
   getMessage,
   getMessages,
   updateMessage,
-} from "../controllers/templateController";
+} from "@/src/controllers/templateController";
 
 const router = Router();
 

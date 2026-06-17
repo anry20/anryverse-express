@@ -1,4 +1,4 @@
-import { AppError } from './errorHandler';
+import { AppError } from '@/src/middlewares/errorHandler';
 export const unknownRouteHandler = (
 
 ) => {

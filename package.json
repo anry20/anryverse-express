@@ -1,9 +1,9 @@
 {
-  "name": "anryverse-express",
+  "name": "backend",
   "version": "1.0.0",
   "description": "An Express.js application",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/server.js",
     "dev": "nodemon --exec ts-node server.ts",
     "lint": "eslint . --ext .ts --fix"
@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "Anry.Dev",
   "license": "MIT",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@11.7.0",
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@tsconfig/node22": "^22.0.2",
@@ -26,6 +26,7 @@
     "nodemon": "^3.1.10",
     "pnpm": "^10.14.0",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.17",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.1"
   },

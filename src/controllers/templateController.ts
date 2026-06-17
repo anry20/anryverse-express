@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import { AppError } from "../middlewares/errorHandler";
-import { messages } from "../models/templateModel";
+import { AppError } from "@/src/middlewares/errorHandler";
+import { messages } from "@/src/models/templateModel";
 
 export const createMessage = (
   req: Request,
