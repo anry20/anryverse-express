@@ -1,6 +1,4 @@
-import { AppError } from '@/src/middlewares/errorHandler';
-export const unknownRouteHandler = (
-
-) => {
-  throw new AppError("Unknown Route", 404);
-};
+import { AppError } from '@/src/middlewares/errorHandler'
+export const unknownRouteHandler = () => {
+  throw new AppError('Unknown Route', 404)
+}

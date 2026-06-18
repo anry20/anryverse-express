@@ -1,17 +1,17 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
-const requiredEnvs = ["PORT", "NODE_ENV"];
+const requiredEnvs = ['PORT', 'NODE_ENV']
 for (const env of requiredEnvs) {
   if (!process.env[env]) {
-    throw new Error(`Missing required environment variable: ${env}`);
+    throw new Error(`Missing required environment variable: ${env}`)
   }
 }
 
 export const config = {
   port: Number(process.env.PORT) || 3000,
-  nodeEnv: process.env.NODE_ENV || "development",
-};
+  nodeEnv: process.env.NODE_ENV || 'development',
+}
 
-export default config;
+export default config

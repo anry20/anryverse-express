@@ -1,24 +1,31 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import templateRoutes from "@/src/routes/templateRoutes";
-import { errorHandler } from "@/src/middlewares/errorHandler";
-import { unknownRouteHandler } from "@/src/middlewares/unknownRouteHandler";
+import express from 'express'
+import cors from 'cors'
+import helmet from 'helmet'
+import { config } from '@/src/config'
+import templateRoutes from '@/src/routes/templateRoutes'
+import swaggerMiddleware from '@/swagger'
+import { errorHandler } from '@/src/middlewares/errorHandler'
+import { unknownRouteHandler } from '@/src/middlewares/unknownRouteHandler'
 
-const app = express();
+const app = express()
 
 // Security Headers
-app.use(helmet());
-app.use(cors());
+app.use(helmet())
+app.use(cors())
 
-//Json Body Parser
-app.use(express.json());
+// Json Body Parser
+app.use(express.json())
 
-//API Routes
-app.use("/api/v1/templates", templateRoutes);
+// Swagger documentation available only in development environment
+if (config.nodeEnv === 'development') {
+  app.use('/api-docs', swaggerMiddleware)
+}
 
-//Middlewares
-app.use(unknownRouteHandler);
-app.use(errorHandler);
+// API Routes
+app.use('/api/v1/templates', templateRoutes /* #swagger.tags = ['Messages'] */)
 
-export default app;
+// Error Middlewares
+app.use(unknownRouteHandler)
+app.use(errorHandler)
+
+export default app
