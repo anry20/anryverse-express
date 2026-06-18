@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import templateRoutes from "./src/routes/templateRoutes";
-import { errorHandler } from "./src/middlewares/errorHandler";
-import { unknownRouteHandler } from "./src/middlewares/unknownRouteHandler";
+import templateRoutes from "@/src/routes/templateRoutes";
+import { errorHandler } from "@/src/middlewares/errorHandler";
+import { unknownRouteHandler } from "@/src/middlewares/unknownRouteHandler";
 
 const app = express();
 
