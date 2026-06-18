@@ -1,3 +1,0 @@
-pnpm add express dotenv pnpm add -D typescript @types/node @types/express @tsconfig/node22 nodemon eslint
-pnpm add -D ts-node typescript
-pnpm create @eslint/config@latest
