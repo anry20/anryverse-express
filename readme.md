@@ -12,7 +12,6 @@ A robust, production-ready, minimal Express.js template for quick API and backen
 - **Environment Validation**: Strict checks to ensure required environment variables (like `PORT` and `NODE_ENV`) are present before booting up.
 - **Linting & Formatting**: Pre-configured with ESLint and Prettier for consistent code quality.
 - **Node Version Manager**: `.nvmrc` included to enforce Node `v24.6.0`.
-- **Database Ready**: Includes `pg` (PostgreSQL client) dependency, ready for your database wiring.
 
 ## 📁 Project Structure
 

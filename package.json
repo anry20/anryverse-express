@@ -37,7 +37,6 @@
   "dependencies": {
     "cors": "^2.8.6",
     "helmet": "^8.1.0",
-    "pg": "^8.21.0",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1"
   }
