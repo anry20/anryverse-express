@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "An Express.js application",
   "scripts": {
-    "swagger": "ts-node -r tsconfig-paths/register swagger/swagger.ts",
-    "build": "npm run swagger && tsc && tsc-alias",
+    "swagger": "tsx swagger/swagger.ts",
+    "build": "npm run swagger && tsup",
     "start": "node dist/server.js",
-    "dev": "nodemon --watch src --ext ts --exec \"npm run swagger && ts-node -r tsconfig-paths/register server.ts\"",
+    "dev": "nodemon --watch app.ts --watch server.ts --watch src --watch swagger --ignore swagger-output.json --ignore swagger/swagger-output.json --ext ts --exec \"npm run swagger && tsx server.ts\"",
     "lint": "eslint . --ext .ts --fix"
+  },
+  "type": "module",
+  "imports": {
+    "#src/*": "./src/*",
+    "#generated/*": "./generated/*"
   },
   "keywords": [],
   "author": "Anry.Dev",
@@ -31,6 +36,8 @@
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.17",
     "tsconfig-paths": "^4.2.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.22.4",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.1"
   },

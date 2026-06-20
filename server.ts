@@ -1,5 +1,5 @@
-import app from '@/app'
-import config from '@/src/config/config'
+import app from './app'
+import config from '#src/config'
 
 const server = app.listen(config.port, () => {
   console.log(`Server running on http://localhost:${config.port}`)

@@ -1,11 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
-import { config } from '@/src/config'
-import templateRoutes from '@/src/routes/templateRoutes'
-import swaggerMiddleware from '@/swagger'
-import { errorHandler } from '@/src/middlewares/errorHandler'
-import { unknownRouteHandler } from '@/src/middlewares/unknownRouteHandler'
+import { config } from '#src/config'
+import templateRoutes from '#src/routes/templateRoutes'
+import swaggerMiddleware from './swagger'
+import { errorHandler } from '#src/middlewares/errorHandler'
+import { unknownRouteHandler } from '#src/middlewares/unknownRouteHandler'
 
 const app = express()
 

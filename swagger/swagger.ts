@@ -1,5 +1,5 @@
 import swaggerAutogen from 'swagger-autogen'
-import { config } from '@/src/config'
+import { config } from '#src/config'
 
 const autogenOptions = { openapi: '3.0.0' }
 
@@ -32,7 +32,7 @@ const doc = {
 }
 
 const outputFile = './swagger-output.json'
-const endpointsFiles = ['../app.ts']
+const endpointsFiles = ['../app.ts', './swagger.manualDocs.ts']
 
 swaggerAutogen(autogenOptions)(outputFile, endpointsFiles, doc).then(() => {
   console.log('Swagger JSON generated successfully!')
